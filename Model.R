@@ -3,7 +3,6 @@
 
 library(R6)
 library(igraph)
-library(deldir)
 
 ### Model class ----
 
@@ -183,7 +182,6 @@ Model <- R6Class('Model', list(
       self$partition_out = list()
     self$sigmasq_y_out = numeric((MCMC-BURNIN)/THIN)
     self$g_out = array(0, dim = c((MCMC-BURNIN)/THIN, n, M))
-    # self$log_like_out = numeric((MCMC-BURNIN)/THIN)
     self$importance_out = matrix(0, nrow = (MCMC-BURNIN)/THIN, ncol = p + 1)
     if (prediction_flag) {
       n_new = nrow(self$X_new)

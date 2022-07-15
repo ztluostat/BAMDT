@@ -41,7 +41,8 @@ X_ho = X_all[-(1:n), , drop = F]
 ggplot() + 
   geom_boundary(ubnd) +
   geom_point(aes(x = lon, y = lat, color = X[, 1]), data = as.data.frame(coords)) +
-  scale_color_gradientn(colours = rainbow(5))
+  scale_color_gradientn(colours = rainbow(5))  +
+  labs(x = 's_1', y = 's_2', title = 'X[, 1]')
 
 # generate true function
 f_true = evalFunU(coords, X, angle = rot_angle)
@@ -70,7 +71,8 @@ ggplot() +
   geom_boundary(ubnd) +
   geom_ellipse(0.9, 0.9, 0, 0) +
   geom_point(aes(x = lon, y = lat, col = f_true), data = as.data.frame(coords)) +
-  scale_color_gradientn(colours = rainbow(5), name = 'True f')
+  scale_color_gradientn(colours = rainbow(5), name = 'True f') +
+  labs(x = 's_1', y = 's_2', title = 'True function')
 
 
 # generate replicate data sets

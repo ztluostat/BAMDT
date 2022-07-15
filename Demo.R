@@ -93,7 +93,7 @@ ggplot() +
   geom_point(aes(x = lon, y = lat, col = Y_ho_hat),
              data = as.data.frame(coords_ho)) +
   scale_color_gradientn(colors = rainbow(5)) +
-  ggtitle('Prediction of BAMDT')
+  ggtitle('Prediction of BAMDT') + labs(x = 's_1', y = 's_2')
 
 # check feature importance metric
 colMeans(model$importance_out)

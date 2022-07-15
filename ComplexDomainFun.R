@@ -1,6 +1,5 @@
 ### Functions related to complex domains ###
 
-library(mgcv)
 library(fdaPDE)
 library(igraph)
 library(sf)
@@ -162,8 +161,6 @@ constrainedDentri <- function(n, mesh, threshold = 1e6, crs = NULL,
   edge_list = edge_list[!rid_drop, ]
   distance = distance[!rid_drop]
   
-  # graph0 = graph_from_edgelist(edge_list, directed = F)
-  # E(graph0)$weight = distance
   adj_mat = matrix(0, nrow = n, ncol = n)
   adj_mat[edge_list] = distance
   adj_mat = adj_mat + t(adj_mat)
