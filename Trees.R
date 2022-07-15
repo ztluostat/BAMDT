@@ -562,44 +562,6 @@ Partition <- R6Class('Partition', list(
     return(height)
   },
   
-  # function to update spanning tree
-  UpdateSpanningTree = function(graph0) {
-    ## sample spanning tree
-    weights = rep(-1, ecount(graph0))
-    height = self$GetHeight()
-    # DFS to sample edge weights
-    stack = collections::stack()
-    stack$push(list('node' = self$decision_root, 'visited' = F))
-    while (stack$size() > 0) {
-      node_pair = stack$pop()
-      node = node_pair$node; visited = node_pair$visited
-      if (!visited) {
-        if (node$is_terminal) {
-          # get subgraph of graph0
-          knot_ids = node$knot_ids
-          subgraph0 = induced_subgraph(graph0, knot_ids)
-          # sample weights for within cluster edges
-          weights[E(subgraph0)$eid] = runif(ecount(subgraph0), 0, 1)
-        } else {
-          stack$push(list('node' = node, 'visited' = T))
-          stack$push(list('node' = node$children[[2]], 'visited' = F))
-          stack$push(list('node' = node$children[[1]], 'visited' = F))
-        }
-      } else {
-        # get subgraph of graph0
-        knot_ids = node$knot_ids
-        subgraph0 = induced_subgraph(graph0, knot_ids)
-        eid_subgraph0 = E(subgraph0)$eid
-        # sample weights for between cluster edges
-        idx_btw = which(weights[eid_subgraph0] == -1)
-        weights[eid_subgraph0][idx_btw] = runif(length(idx_btw), height - node$depth - 1, height - node$depth)
-      }
-    }
-    self$spanning_tree = mst(graph0, weights)
-    self$st_e_adj_list = as_adj_edge_list(self$spanning_tree)
-    
-  },
-  
   # function to evaluate log prior
   # probability that a node is non-terminal is alpha * (1 + d) ^ (-beta)
   EvalLogPrior = function(alpha, beta, prob_split_by_x, X) {

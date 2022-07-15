@@ -79,16 +79,14 @@ Model <- R6Class('Model', list(
   ## for out-of-sample prediction
   X_new = NULL,
   coords_new = NULL,
-  projections_new = NULL,  # array with dimension (nrow(X_new), nn, M)
+  projections_new = NULL,  # array with dimension (nrow(X_new), 1, M)
   
   ## MCMC samples
-  partition_out = NULL,
-  sigmasq_y_out = NULL,
-  g_out = NULL,
-  # log_post_out = NULL,
-  importance_out = NULL,
-  # log_like_out = NULL,
-  Y_new_out = NULL,
+  partition_out = NULL,   # samples of tree partition
+  sigmasq_y_out = NULL,   # samples of noise variance
+  g_out = NULL,           # samples of fitted value from each tree
+  importance_out = NULL,  # samples of feature importance
+  Y_new_out = NULL,       # samples of predicted value
   
   ## MCMC settings
   MCMC = NULL,
@@ -104,7 +102,7 @@ Model <- R6Class('Model', list(
     self$n_knots = sapply(graphs, vcount)
     
     self$X_new = X_new
-    self$projections_new = projections_new
+    self$projections_new = array(projections_new, dim = c(nrow(projections_new), 1, ncol(projections_new)))
     
     for (m in 1:length(graphs)) {
       if('name' %in% names(vertex_attr(self$graphs[[m]]))) {
@@ -161,6 +159,10 @@ Model <- R6Class('Model', list(
     alpha = self$hyperpar['alpha']
     beta = self$hyperpar['beta']
     prob_split_by_x_0 = self$hyperpar['prob_split_by_x']
+    
+    # check sizes
+    if(length(self$graphs) != M)
+      stop('Number of spatial graphs should be equal to the number of trees')
     
     # initialize
     sigmasq_y = init_val[['sigmasq_y']]
