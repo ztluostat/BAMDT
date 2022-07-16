@@ -4,7 +4,7 @@ R Implementation of Bayesian Additive Semi-Structured Regression Trees (BAMDT).
 Reference:
 
 Luo, Z. T., Sang, H., & Mallick, B. (2022) BAMDT: Bayesian Additive Semi-Multivariate Decision Trees for
-Nonparametric Regression. *Proceedings of the 39th International Conference on Machine Learning (ICML 2022)*
+Nonparametric Regression. *Proceedings of the 39th International Conference on Machine Learning (ICML 2022)* [[link](https://proceedings.mlr.press/v162/luo22a.html)]
 
 ### Files
 
@@ -53,7 +53,7 @@ Parameters:
     * `init_val[['sigmasq_y']]`: Initial value for noise variance $\sigma^2$.
 * `MCMC`: Number of MCMC iterations.
 * `BURNIN`: Number of burn-in iterations.
-* `THIN`: Retain MCMC samples every `THIN` iterations, i.e., the number of posterior sample is `npost = (MCMC - BURNIN) / THIN`.
+* `THIN`: Retain MCMC samples every `THIN` iterations, i.e., the number of posterior samples is `npost = (MCMC - BURNIN) / THIN`.
 * `seed`: Random seed.
 * `save_partition`: Logical value indicating whether posterior samples of partitions are saved. Default is `FALSE` (recommended). Setting `save_partition = TRUE` is highly memory inefficient.
 
