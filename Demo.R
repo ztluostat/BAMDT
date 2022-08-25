@@ -1,7 +1,6 @@
 ##### Demo code for BAMDT ######
 
 rm(list=ls())
-setwd('D:\\Documents\\_TAMU\\Projects\\Github\\BAMDT')
 library(ggplot2)
 source('ComplexDomainFun.R')
 source('Trees.R')

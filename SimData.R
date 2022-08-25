@@ -1,7 +1,6 @@
 ### Simulation data on U-shape domain ###
 
 rm(list=ls())
-setwd('D:\\Documents\\_TAMU\\Projects\\Github\\BAMDT')
 library(ggplot2)
 source('ComplexDomainFun.R')
 
